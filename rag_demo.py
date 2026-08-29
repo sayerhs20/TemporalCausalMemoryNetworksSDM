@@ -1,16 +1,3 @@
-"""
-RAG layer for TCMN-lite: two retrieval demos.
-    1. Business-rule retrieval -> grounds causal-graph priors.
-    2. Trajectory retrieval -> finds similar past order sequences (a
-       text-based stand-in for what the model's causal memory does
-       internally in vector form).
-
-Needs internet access on first run to download the embedding model
-(~80MB, one-time). If you're offline, this script will fail at the
-SentenceTransformer(...) line -- everything else in the project does
-not depend on this.
-"""
-
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
@@ -52,7 +39,6 @@ def main():
     rule_index = build_index(BUSINESS_RULES, model)
     traj_index = build_index(TRAJECTORY_SUMMARIES, model)
 
-    # --- Demo 1: business-rule retrieval for a causal-graph prior question ---
     query1 = "Does customer country confound whether an order is completed?"
     top_rules = retrieve(query1, BUSINESS_RULES, rule_index, model, top_k=2)
     print(f"\nQuery: {query1}")
@@ -60,7 +46,6 @@ def main():
     for r in top_rules:
         print(" -", r)
 
-    # --- Demo 2: trajectory retrieval for a new, unseen order pattern ---
     new_trajectory = "price moved 2000 -> 1900 -> 1950"
     top_traj = retrieve(new_trajectory, TRAJECTORY_SUMMARIES, traj_index, model, top_k=1)
     print(f"\nNew order pattern: {new_trajectory}")
@@ -68,8 +53,6 @@ def main():
     for t in top_traj:
         print(" -", t)
 
-    # --- Demo 3: turning a model's causal attribution into a plain-English explanation ---
-    # (stub -- swap in ollama.chat(...) here if you have Ollama + llama3 installed locally)
     causal_attribution = "price2 revision (2500 -> 2400) is the primary driver of order 402 being Cancelled"
     print(f"\nCausal attribution to explain: {causal_attribution}")
     print("Explanation (LLM call would go here):")
