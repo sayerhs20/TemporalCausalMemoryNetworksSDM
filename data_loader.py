@@ -1,10 +1,3 @@
-"""
-Turns the flat orders table into what TCMN-lite actually consumes:
-    - a (batch, seq_len=3, 1) price trajectory tensor
-    - a (batch,) country id tensor (categorical confounder)
-    - a (batch,) status label tensor (the outcome to predict)
-"""
-
 import numpy as np
 import pandas as pd
 import torch
