@@ -16,7 +16,7 @@ Network project, built to have something real to show at the review.
 
 ```bash
 cd tcmn_project
-python3 -m venv venv
+python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
@@ -25,19 +25,19 @@ pip install -r requirements.txt
 
 ```bash
 # 1. Generate the training dataset (6 real orders + 250 synthetic, same causal pattern)
-python3 src/generate_synthetic_orders.py
+python src/generate_synthetic_orders.py
 
 # 2. Sanity-check the data pipeline (trajectory tensor shapes)
-python3 src/data_loader.py
+python src/data_loader.py
 
 # 3. Sanity-check the model's forward pass
-python3 src/model.py
+python src/model.py
 
 # 4. Train TCMN-lite and see accuracy + the confounder check
-python3 src/train.py
+python src/train.py
 
 # 5. Run the RAG explanation demo (needs internet on first run, downloads ~80MB model)
-python3 src/rag_demo.py
+python src/rag_demo.py
 ```
 
 ## What to show live in the review, in order
