@@ -1,0 +1,11 @@
+product_id,product_name,quantity,price1,price2,price3,category,product_code
+201,Laptop,15,50000.00,52000.00,51000.00,Electronics,LAP101
+202,Mouse,100,500.00,550.00,530.00,Accessories,MOU102
+203,Keyboard,80,1200.00,1250.00,1180.00,Accessories,KEY103
+204,Monitor,25,15000.00,14800.00,15200.00,Electronics,MON104
+205,Printer,12,9000.00,9200.00,9100.00,Office,PRI105
+206,Projector,10,30000.00,29500.00,30500.00,Office,PRO106
+207,Hard Disk,60,4500.00,4400.00,4550.00,Storage,HAR107
+208,SSD,40,7000.00,7100.00,6900.00,Storage,SSD108
+209,Router,30,3500.00,3600.00,3400.00,Networking,ROU109
+210,Webcam,45,2500.00,2450.00,2550.00,Accessories,WEB110

@@ -1,0 +1,11 @@
+emp_id,emp_name,department_id,salary,age,phone_number,joining_date,status,country
+101,Alice Johnson,2,85000.00,28,9876543210,2022-01-15,Active,India
+102,Brian Smith,1,62000.00,35,9123456780,2021-03-20,Active,USA
+103,Charlie Brown,3,55000.00,31,NULL,2023-06-11,Inactive,India
+104,Diana Prince,2,98000.00,29,9988776655,2020-09-05,Active,UK
+105,Edward Lee,4,47000.00,42,NULL,2019-12-01,Active,Singapore
+106,Fiona Davis,1,72000.00,33,9001122334,2021-11-18,Inactive,India
+107,George Wilson,3,69000.00,37,9112233445,2018-05-10,Active,Canada
+108,Hannah Moore,4,54000.00,26,9887766554,2024-01-22,Active,India
+109,Isaac Newton,2,120000.00,45,9776655443,2017-08-30,Active,UK
+110,Julia Roberts,1,81000.00,30,9665544332,2023-04-17,Inactive,USA
