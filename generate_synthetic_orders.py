@@ -1,28 +1,9 @@
-"""
-Expands the 6 real orders into a larger synthetic dataset for training a
-demonstrable baseline model this weekend.
-
-Why synthetic data at all: 6 real rows is not enough to train even a tiny
-LSTM meaningfully. This script generates additional plausible orders that
-follow the SAME causal pattern you'll describe in your review:
-    - A late-stage price INCREASE (price2 -> price3 going up) makes
-      Cancelled more likely (a real causal effect you're modeling).
-    - customer 'country' is injected as a CONFOUNDER: certain countries
-      are, on average, just more likely to cancel regardless of price
-      behavior (so the model has something real to disentangle).
-
-Be upfront in your review that this synthetic layer exists to make a
-trainable demo possible in the time available, and that the real project
-plan is to replace it with more historical order data.
-"""
-
 import numpy as np
 import pandas as pd
 
 RNG = np.random.default_rng(42)
 
 COUNTRIES = ["India", "USA", "UK", "Singapore", "Canada"]
-# confounder: baseline cancellation propensity per country (deliberately unequal)
 COUNTRY_CANCEL_BIAS = {"India": -0.10, "USA": 0.05, "UK": 0.00, "Singapore": -0.05, "Canada": 0.10}
 CATEGORIES = ["Electronics", "Accessories", "Office", "Storage", "Networking"]
 
@@ -36,12 +17,11 @@ def generate_synthetic_orders(n=250, start_id=500):
         category = RNG.choice(CATEGORIES)
 
         price1 = round(RNG.uniform(400, 5000), 2)
-        step1_change = RNG.normal(0, 0.05)          # price1 -> price2
+        step1_change = RNG.normal(0, 0.05)          
         price2 = round(price1 * (1 + step1_change), 2)
-        step2_change = RNG.normal(0.02, 0.08)        # price2 -> price3 (slight upward drift)
+        step2_change = RNG.normal(0.02, 0.08)        
         price3 = round(price2 * (1 + step2_change), 2)
 
-        # --- the causal signal the model should learn ---
         late_increase = (price3 - price2) / price2
         cancel_logit = 2.5 * late_increase + COUNTRY_CANCEL_BIAS[country]
         cancel_prob = 1 / (1 + np.exp(-cancel_logit * 5))
@@ -74,7 +54,7 @@ if __name__ == "__main__":
     real_orders = pd.read_csv("data/orders.csv")
     customers = pd.read_csv("data/customers.csv")
     real_orders = real_orders.merge(customers[["customer_id", "country"]], on="customer_id", how="left")
-    real_orders["category"] = "Electronics"  # placeholder for the 6 real rows
+    real_orders["category"] = "Electronics"
 
     synthetic = generate_synthetic_orders(n=250)
     combined = pd.concat([real_orders, synthetic], ignore_index=True)
